@@ -1,4 +1,4 @@
-<h1>RUN MICROSERVICES WITH DOCKER</h1>
+<h2>RUN MICROSERVICES WITH DOCKER</h2>
 <br>
 <span style="color:  #c5f015"> 1. Git clone Kafka and Zookeeper images: <br> </span>
 On a personal preferred folder do: 
@@ -39,7 +39,7 @@ Run: <strong>cp (<i>path to target folder of consumer app</i>)/target/MarlowBank
 <br>
 Inside the docker folder run: <strong>docker-compose up</strong>
 
-<h1>TEST MICROSERVICES</h1>
+<h2>TEST MICROSERVICES</h2>
 A user is created automatically when you start the app with email/username "test_email_1" and balance amount 1500.<br>
 Below you can find info needed to make test using postman:
 <br>

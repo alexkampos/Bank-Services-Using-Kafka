@@ -1,3 +1,42 @@
+<h3>TEST APP</h3>
+<br>
+You can test the app using postman.
+A user is created automatically when you start the app with email/username "test_email_1" and balance amount 1500.
+Below you can find info regarding those calls:
+<br>
+<br>
+DEPOSIT CALL:
+<br>
+Authorization:
+<br>
+username: test_email_1
+<br>
+password: 1234
+<br>
+Body:
+<br>
+{
+    "userEmail": "test_email_1",
+    "userAction": "DEPOSIT",
+    "amount": (the amount you want as number)
+}
+<br>
+WITHDRAW CALL:
+<br>
+Authorization:
+<br>
+username: test_email_1
+<br>
+password: 1234
+<br>
+Body:
+<br>
+{
+    "userEmail": "test_email_1",
+    "userAction": "WITHDRAW",
+    "amount": (the amount you want as number)
+}
+
 <h1>RUN APPS WITH DOCKER</h1>
 <br>
 <span style="color:  #c5f015"> 1. Git clone Kafka and Zookeeper images: <br> </span>

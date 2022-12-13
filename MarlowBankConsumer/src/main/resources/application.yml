@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: dev
+  # KAFKA CONFIGURATION
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
+    consumer:
+      group-id: balance-warnings
+      auto-offset-reset: earliest
+  # MAIL CONFIGURATION
+#  mail:
+#    host: smtp.gmail.com
+#    username: <the email you want to send emails from>
+#    password: <password>
+#    port: 587
+#    protocol: smtp
+#    tls: true
+#    properties.mail.smtp:
+#      auth: true
+#      starttls.enable: true
+#      ssl.trust: smtp.gmail.com

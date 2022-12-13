@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev
+  # DATABASE CONFIGURATION
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+      show-sql: true
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  # KAFKA CONFIGURATION
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}

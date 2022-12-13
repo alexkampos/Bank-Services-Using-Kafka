@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  profiles:
+    active: test
+  # DATABASE CONFIGURATION
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.H2Dialect
+      ddl-auto: none
+      show-sql: true
+  datasource:
+    url: jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1;LOCK_TIMEOUT=10000
+  flyway:
+    enabled: false
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  # KAFKA CONFIGURATION
+  kafka:
+    bootstrap-servers: localhost:9092

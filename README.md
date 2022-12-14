@@ -1,4 +1,6 @@
-<h1>RUN APPS WITH DOCKER</h1>
+<h2>RUN MICROSERVICES WITH DOCKER</h2>
+<strong><i>Below commands are compatible on windows.</i></strong>
+<br>
 <br>
 <span style="color:  #c5f015"> 1. Git clone Kafka and Zookeeper images: <br> </span>
 On a personal preferred folder do: 
@@ -38,3 +40,44 @@ Run: <strong>cp (<i>path to target folder of consumer app</i>)/target/MarlowBank
 <span style="color:  #c5f015"> 8. Run consumer app image: </span>
 <br>
 Inside the docker folder run: <strong>docker-compose up</strong>
+
+<h2>TEST MICROSERVICES</h2>
+A user is created automatically when you start the app with email/username "test_email_1" and balance amount 1500.<br>
+Below you can find info needed to make test using postman:
+<br>
+<br>
+<h3>DEPOSIT CALL</h3>
+<pre>
+<h4>Request</h4>
+url: http://127.0.0.1:8080/user
+method: POST
+<br>
+<h4>Authorization</h4>
+username: test_email_1
+password: 1234
+<br>
+<h4>Body</h4>
+{
+    "userEmail": "test_email_1",
+    "userAction": "DEPOSIT",
+    "amount": (the amount you want as number)
+}
+</pre>
+<br>
+<h3>WITHDRAW CALL</h3>
+<pre>
+<h4>Request</h4>
+url: http://127.0.0.1:8080/user
+method: POST
+<br>
+<h4>Authorization</h4>
+username: test_email_1
+password: 1234
+<br>
+<h4>Body</h4>
+{
+    "userEmail": "test_email_1",
+    "userAction": "WITHDRAW",
+    "amount": (the amount you want as number)
+}
+</pre>

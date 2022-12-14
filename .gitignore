@@ -33,3 +33,17 @@ out/
 *.iml
 *.ipr
 *.iws
+
+##############################
+## Docker
+##############################
+MarlowBank/src/main/docker/db-data/*
+MarlowBank/src/main/docker/marlow-bank/kafka1/data/*
+MarlowBank/src/main/docker/marlow-bank/zoo1/data/*
+MarlowBank/src/main/docker/marlow-bank/zoo1/datalog/*
+
+# exception to above
+!MarlowBank/src/main/docker/db-data/.gitkeep 
+!MarlowBank/src/main/docker/marlow-bank/kafka1/data/.gitkeep 
+!MarlowBank/src/main/docker/marlow-bank/zoo1/data/.gitkeep 
+!MarlowBank/src/main/docker/marlow-bank/zoo1/datalog/.gitkeep 

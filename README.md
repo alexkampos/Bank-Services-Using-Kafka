@@ -48,9 +48,11 @@ Below you can find info needed to make test using postman:
 <br>
 <h3>DEPOSIT CALL</h3>
 <pre>
-<h4>Authorization</h4>
+<h4>Request</h4>
 url: http://127.0.0.1:8080/user
 method: POST
+<br>
+<h4>Authorization</h4>
 username: test_email_1
 password: 1234
 <br>
@@ -64,9 +66,11 @@ password: 1234
 <br>
 <h3>WITHDRAW CALL</h3>
 <pre>
-<h4>Authorization</h4>
+<h4>Request</h4>
 url: http://127.0.0.1:8080/user
 method: POST
+<br>
+<h4>Authorization</h4>
 username: test_email_1
 password: 1234
 <br>

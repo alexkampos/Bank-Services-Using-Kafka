@@ -1,4 +1,6 @@
 <h2>RUN MICROSERVICES WITH DOCKER</h2>
+<strong><i>Below commands are compatible on windows.</i></strong>
+<br>
 <br>
 <span style="color:  #c5f015"> 1. Git clone Kafka and Zookeeper images: <br> </span>
 On a personal preferred folder do: 
@@ -47,6 +49,8 @@ Below you can find info needed to make test using postman:
 <h3>DEPOSIT CALL</h3>
 <pre>
 <h4>Authorization</h4>
+url: http://127.0.0.1:8080/user
+method: POST
 username: test_email_1
 password: 1234
 <br>
@@ -61,6 +65,8 @@ password: 1234
 <h3>WITHDRAW CALL</h3>
 <pre>
 <h4>Authorization</h4>
+url: http://127.0.0.1:8080/user
+method: POST
 username: test_email_1
 password: 1234
 <br>

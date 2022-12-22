@@ -1,9 +1,9 @@
 package org.marlow.service;
 
-import org.marlow.model.dto.BalanceWarningKafkaMessage;
+import org.marlow.model.dto.UserActionKafkaMessage;
 
 public interface KafkaProducerService {
 
-    void send(BalanceWarningKafkaMessage message);
+    void send(UserActionKafkaMessage message);
 
 }

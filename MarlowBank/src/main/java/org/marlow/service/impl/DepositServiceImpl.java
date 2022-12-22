@@ -3,13 +3,13 @@ package org.marlow.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.marlow.model.User;
-import org.marlow.model.dto.AmountNotPositiveNumber;
-import org.marlow.model.dto.UserActionRequest;
-import org.marlow.model.dto.UserActionResponse;
+import org.marlow.model.dto.*;
 import org.marlow.model.enums.UserAction;
 import org.marlow.repository.UserRepository;
+import org.marlow.service.KafkaProducerService;
 import org.marlow.service.UserActionService;
 import org.marlow.util.Constants;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -22,6 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class DepositServiceImpl implements UserActionService {
 
     private final UserRepository userRepository;
+
+    @Qualifier("balanceUnderLimitProducerServiceImpl")
+    private final KafkaProducerService kafkaProducerService;
 
     /**
      * Searches user on database by the email provided
@@ -45,8 +48,13 @@ public class DepositServiceImpl implements UserActionService {
         if (user.getBalance().intValue() >= Constants.BANALANCE_LIMIT) {
             user.setShouldNotifyAboutUnderLimitBalance(true);
         }
-        userRepository.save(user);
-        log.info("User's balance was updated. [email: {}, balance: {}]", user.getEmail(), user.getBalance());
+
+        kafkaProducerService.send(UserActionKafkaMessage.builder()
+                .userEmail(user.getEmail())
+                .userAction(userActionRequest.getUserAction())
+                .amount(userActionRequest.getAmount())
+                .build());
+
         UserActionResponse userActionResponse = UserActionResponse.builder().result(Constants.RESPONSE_OK).build();
         return ResponseEntity.ok(userActionResponse);
     }

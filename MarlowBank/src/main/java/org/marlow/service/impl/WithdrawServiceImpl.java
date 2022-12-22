@@ -15,8 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-
 
 @Service
 @RequiredArgsConstructor
@@ -54,17 +52,12 @@ public class WithdrawServiceImpl implements UserActionService {
         }
         user.setBalance(user.getBalance().subtract(userActionRequest.getAmount()));
 
-        boolean isUserBalanceUnderLimit = user.getBalance().compareTo(BigDecimal.valueOf(Constants.BANALANCE_LIMIT)) == -1;
-        if (isUserBalanceUnderLimit && user.isShouldNotifyAboutUnderLimitBalance()) {
-            kafkaProducerService.send(BalanceWarningKafkaMessage.builder()
+            kafkaProducerService.send(UserActionKafkaMessage.builder()
                     .userEmail(user.getEmail())
+                    .userAction(userActionRequest.getUserAction())
+                    .amount(userActionRequest.getAmount())
                     .build());
             user.setShouldNotifyAboutUnderLimitBalance(false);
-
-        }
-
-        userRepository.save(user);
-        log.info("User's balance was updated. [email: {}, balance: {}]", user.getEmail(), user.getBalance());
 
         UserActionResponse userActionResponse = UserActionResponse.builder().result(Constants.RESPONSE_OK).build();
         return ResponseEntity.ok(userActionResponse);

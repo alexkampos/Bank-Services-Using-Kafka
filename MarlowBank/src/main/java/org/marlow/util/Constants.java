@@ -19,9 +19,9 @@ public final class Constants {
     public static final String RESPONSE_NOK = "FAIL";
 
     // KAFKA
-    public static final String BALANCE_WARNING_TOPIC = "balance-warning";
-    public static final Integer BALANCE_WARNING_PARTITION_COUNT = 5;
-    public static final Integer BALANCE_WARNING_REPLICAS_COUNT = 1;
+    public static final String USER_ACTION_TOPIC = "user-actions";
+    public static final Integer USER_ACTION_PARTITION_COUNT = 3;
+    public static final Integer USER_ACTION_REPLICAS_COUNT = 2;
 
     // GENERIC
     public static final Integer BANALANCE_LIMIT = 100;

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,11 +21,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
-        Optional<User> userTryingToLogin = userRepository.findByEmail(email);
-        if (userTryingToLogin.isEmpty()) {
-            throw new UsernameNotFoundException(Constants.EMAIL_NOT_FOUND);
-        }
-        User user = userTryingToLogin.get();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(Constants.EMAIL_NOT_FOUND));
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getEmail())
                 .password(user.getPassword())

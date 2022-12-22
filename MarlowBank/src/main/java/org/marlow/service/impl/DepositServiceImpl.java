@@ -15,8 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 
 @Service
 @RequiredArgsConstructor
@@ -40,13 +38,9 @@ public class DepositServiceImpl implements UserActionService {
         if (userActionRequest.getAmount().intValue() <= 0) {
             throw new AmountNotPositiveNumber(Constants.AMOUNT_NOT_POSITIVE);
         }
-        Optional<User> userOptional = userRepository
-                .findByEmailPessimistic(userActionRequest.getUserEmail());
-        // the below check is probably not necessary, but just in case
-        if (userOptional.isEmpty()) {
-            throw new UsernameNotFoundException(Constants.EMAIL_NOT_FOUND);
-        }
-        User user = userOptional.get();
+        User user = userRepository
+                .findByEmailPessimistic(userActionRequest.getUserEmail())
+                .orElseThrow(() -> new UsernameNotFoundException(Constants.EMAIL_NOT_FOUND));
         user.setBalance(user.getBalance().add(userActionRequest.getAmount()));
         if (user.getBalance().intValue() >= Constants.BANALANCE_LIMIT) {
             user.setShouldNotifyAboutUnderLimitBalance(true);

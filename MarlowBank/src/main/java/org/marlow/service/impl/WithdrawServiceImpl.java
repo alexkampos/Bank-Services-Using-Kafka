@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 
 @Service
@@ -46,12 +45,9 @@ public class WithdrawServiceImpl implements UserActionService {
         if (userActionRequest.getAmount().intValue() <= 0) {
             throw new AmountNotPositiveNumber(Constants.AMOUNT_NOT_POSITIVE);
         }
-        Optional<User> userOptional = userRepository.findByEmailPessimistic(userActionRequest.getUserEmail());
-        // the below check is probably not necessary, but just in case
-        if (userOptional.isEmpty()) {
-            throw new UsernameNotFoundException(Constants.EMAIL_NOT_FOUND);
-        }
-        User user = userOptional.get();
+        User user = userRepository
+                .findByEmailPessimistic(userActionRequest.getUserEmail())
+                .orElseThrow(() -> new UsernameNotFoundException(Constants.EMAIL_NOT_FOUND));
         // check if user's balance is less than the withdrawal request's amount
         if (user.getBalance().compareTo(userActionRequest.getAmount()) == -1) {
             throw new OverdraftException(Constants.BALANCE_NOT_ENOUGH);
